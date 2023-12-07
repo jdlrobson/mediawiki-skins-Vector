@@ -49,7 +49,9 @@
 		padding: 4px 0;
 		z-index: @z-index-dropdown;
 		background-color: @background-color-base;
+		background-color: var( --background-color-base );
 		border: @border-width-base @border-style-base @border-color-base;
+		border-color: var( --border-color-base );
 		box-shadow: 0 1px 1px 0 rgba( 0, 0, 0, 0.1 );
 		transition-property: opacity;
 		transition-duration: @transition-duration-base;
@@ -74,11 +76,13 @@
 		// Mirror styles from Dropdown.less
 		.mixin-vector-dropdown-menu-item();
 		color: @color-link;
+		color: var( --color-link );
 	}
 
 	> *:not( :last-child ) {
 		// Apply bottom border to every children of dropdown contents and pinnable elements except the last
-		border-bottom: @border-width-base @border-style-base #eaecf0;
+		border-bottom: @border-width-base @border-style-base @background-color-notice-subtle;
+		border-bottom-color: var( --background-color-notice-subtle );
 	}
 }
 
@@ -100,12 +104,38 @@
 		// The link is a mw-selflink in the case of temporary users.
 		&:not( .mw-selflink ) {
 			color: @color-link;
+			color: var( --color-link );
 		}
 	}
 
 	.selected a,
 	.selected a:visited {
 		color: @color-link-selected;
+		color: var( --color-link-selected );
 		text-decoration: none;
+	}
+}
+
+
+
+.dark-mode-policy() {
+	.vector-dropdown-label::after {
+		filter: invert( 1 ) !important;
+	}
+}
+
+
+.vector-dark-mode-content-policy-clientpref-custom.skin-feature-dark-mode-clientpref-1,
+.vector-dark-mode-content-policy-clientpref-invert.skin-feature-dark-mode-clientpref-1,
+.vector-dark-mode-content-policy-clientpref-strip.skin-feature-dark-mode-clientpref-1 {
+	.dark-mode-policy();
+}
+
+
+@media ( prefers-color-scheme: dark ) {
+	.vector-dark-mode-content-policy-clientpref-custom,
+	.vector-dark-mode-content-policy-clientpref-invert,
+	.vector-dark-mode-content-policy-clientpref-strip {
+		.dark-mode-policy();
 	}
 }

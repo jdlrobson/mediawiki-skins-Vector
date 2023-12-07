@@ -9,6 +9,7 @@
 
 .vector-toc {
 	background-color: @background-color-page-container;
+	background-color: var( --background-color-page-container );
 	font-size: @font-size-base;
 
 	.vector-pinnable-header-label {
@@ -41,6 +42,7 @@
 	.vector-toc-link {
 		word-break: break-word;
 		color: @color-link;
+		color: var( --color-link );
 		display: block;
 	}
 
@@ -52,6 +54,7 @@
 		> .vector-toc-link {
 			// Highlight active section
 			color: @color-base;
+			color: var( --color-base, @color-base );
 			font-weight: bold;
 
 			.vector-toc-text {

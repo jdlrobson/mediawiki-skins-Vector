@@ -13,9 +13,83 @@
  * @since October 2023 (MediaWiki 1.42)
  */
 
+.darkmodetheme() {
+	// Dark mode
+	color-scheme: dark;
+	--background-color-base: #000;
+	--background-color-secondary--modern: #202122;
+	--color-base: #F8F9FA;
+	--background-color-page-container: #202122;
+	--color-link: #6699FF;
+	--color-progressive: #6699FF;
+	--color-emphasized: #fff;
+	--color-subtle: #aba6a2;
+	--color-link-new: #eab5b5;
+	--color-link-selected: #ffffff;
+	--color-link-new--visited: #8a6d6d;
+	--color-link--visited: #86a34d;
+	--background-color-notice-subtle: #15130f;
+	--border-color-portal-heading: #37332e;
+	--border-color-subtle: #37332e;
+
+	// The following are inherited by templates.
+	--background-color-interactive-subtle: #070605;
+	--background-table-heading-base: #15130f;
+	--background-table-base: #070605;
+	--border-color-code: #eaecf0;
+	--background-color-code: #f8f9fa;
+	--vector-icon-external-link: url( images/link-external-small-ltr-invert.svg );
+}
+
 :root {
 	--font-size-medium: unit( @font-size-small, rem );
 	--line-height-medium: @line-height-small;
+	--color-link-selected: @color-link-selected;
+	--background-table-base: #f8f9fa;
+	--background-table-heading-base: #eaecf0;
+	--background-color-base: @background-color-base;
+	--background-color-secondary--modern: @background-color-secondary--modern;
+	--color-base: @color-base;
+	--background-color-page-container: @background-color-page-container;
+	--color-link: @color-link;
+	--color-link-external: @color-link-external;
+	--color-link-selected: @color-link-selected;
+	--color-emphasized: @color-emphasized;
+	--color-progressive: @color-progressive;
+	--color-subtle: @color-subtle;
+	--color-link-new: @color-link-new;
+	--color-link--visited: @color-link--visited;
+	--background-color-notice-subtle: @background-color-notice-subtle;
+	--border-color-portal-heading: @border-color-portal-heading;
+	--vector-background-color-obod: #fc3;
+	--background-color-interactive-subtle: @background-color-interactive-subtle;
+	--border-color-subtle: @border-color-subtle;
+	--border-color-code: #eaecf0;
+	--background-color-code: #f8f9fa;
+	--color-link-new: @color-link-new;
+	--color-link-new--visited: @color-link-new--visited;
+	// CSS janus is magic and will flip this.
+	--vector-icon-external-link: url( images/link-external-small-ltr-progressive.svg );
+}
+
+.skin-feature-dark-mode-clientpref-1 {
+	&.vector-dark-mode-content-policy-clientpref-none,
+	&.vector-dark-mode-content-policy-clientpref-custom,
+	&.vector-dark-mode-content-policy-clientpref-invert,
+	&.vector-dark-mode-content-policy-clientpref-strip {
+		.darkmodetheme();
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		.vector-dark-mode-content-policy-clientpref-none,
+		.vector-dark-mode-content-policy-clientpref-custom,
+		.vector-dark-mode-content-policy-clientpref-invert,
+		.vector-dark-mode-content-policy-clientpref-strip {
+			.darkmodetheme();
+		}
+	}
 }
 
 .vector-feature-custom-font-size-clientpref-1 {

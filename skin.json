@@ -167,7 +167,10 @@
 		"vector-main-menu-pinned": 1,
 		"vector-toc-pinned": 1,
 		"vector-client-prefs-pinned": 1,
-		"vector-font-size": 0
+		"vector-font-size": 0,
+		"vector-dark-mode-content-policy": "none",
+		"vector-dark-mode": 1,
+		"vector-typography-survey": 1
 	},
 	"HookHandlers": {
 		"VectorCentralAuthHooks": {
@@ -267,7 +270,8 @@
 				"toc": false
 			},
 			"styles": [
-				"resources/skins.vector.styles/skin.less"
+				"resources/skins.vector.styles/skin.less",
+				"resources/skins.vector.styles/site.css"
 			],
 			"lessMessages": [
 				"parentheses-start",
@@ -366,7 +370,10 @@
 				"vector-feature-limited-width-1-label",
 				"vector-feature-custom-font-size-0-label",
 				"vector-feature-custom-font-size-1-label",
-				"vector-feature-custom-font-size-2-label"
+				"vector-feature-custom-font-size-2-label",
+				"skin-feature-dark-mode-name",
+				"skin-feature-dark-mode-0-label",
+				"skin-feature-dark-mode-1-label"
 			],
 			"dependencies": [
 				"mediawiki.api",
@@ -462,6 +469,29 @@
 				"mediawiki.page.ready",
 				"mediawiki.util"
 			]
+		},
+		"skins.vector.nightModeSurvey": {
+			"packageFiles": [
+				"resources/skins.vector.nightModeSurvey/index.js",
+				"resources/skins.vector.nightModeSurvey/TypographySurvey.vue"
+			],
+			"dependencies": [
+				"vue",
+				"mediawiki.storage"
+			],
+			"messages": [
+				"vector-readability-survey-title",
+				"vector-readability-survey-description",
+				"vector-readability-survey-option-1",
+				"vector-readability-survey-option-2",
+				"vector-readability-survey-option-3",
+				"vector-readability-survey-option-4",
+				"vector-readability-survey-option-5",
+				"vector-readability-survey-optout",
+				"vector-readability-survey-randomize",
+				"vector-readability-survey-reset",
+				"vector-readability-survey-share"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -470,6 +500,8 @@
 	},
 	"ResourceModuleSkinStyles": {
 		"vector-2022": {
+			"codex-search-styles": "skinStyles/codex-styles.less",
+			"codex-styles": "skinStyles/codex-styles.less",
 			"ext.echo.styles.badge": "skinStyles/ext.echo.styles.badge.less",
 			"+ext.echo.styles.alert": "skinStyles/ext.echo.styles.alert.less",
 			"+mediawiki.action.edit": "skinStyles/mediawiki.action.edit.less",
@@ -536,9 +568,17 @@
 		]
 	},
 	"config": {
+		"VectorDarkModeEnabled": {
+			"value": {
+				"logged_in": true,
+				"logged_out": true,
+				"beta": true
+			},
+			"description": "@var array enables dark mode."
+		},
 		"VectorClientPreferences": {
 			"value": {
-				"logged_in": false,
+				"logged_in": true,
 				"logged_out": false,
 				"beta": false
 			},
@@ -646,6 +686,13 @@
 				"beta": false
 			},
 			"description": "@var boolean Temporary feature flag that enables the zebra design for the Vector skin."
+		},
+		"VectorTypographySurvey": {
+			"value": {
+				"logged_in": true,
+				"logged_out": false
+			},
+			"description": "@var boolean Temporary feature flag to enable a survey tool to gather feedback for typography changes in Vector. Note the user preference `vector-typography-survey` must also be set for the tool to be displayed."
 		}
 	},
 	"ServiceWiringFiles": [

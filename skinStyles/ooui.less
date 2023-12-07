@@ -8,3 +8,18 @@ body > .oo-ui-windowManager {
 		z-index: @z-index-overlay;
 	}
 }
+
+.dark-mode-policy() {
+	.oo-ui-widget {
+		filter: invert( 1 ) hue-rotate( 180deg );
+	}
+}
+
+.skin-feature-dark-mode-clientpref-1 {
+	.dark-mode-policy();
+}
+
+
+@media ( prefers-color-scheme: dark ) {
+	.dark-mode-policy();
+}

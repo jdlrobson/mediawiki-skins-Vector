@@ -553,6 +553,9 @@ class Hooks implements
 	 */
 	public function onGetPreferences( $user, &$prefs ): void {
 		$vectorPrefs = [
+			'vector-dark-mode-content-policy' => [
+				'type' => 'api'
+			],
 			Constants::PREF_KEY_FONT_SIZE => [
 				'type' => 'api'
 			],

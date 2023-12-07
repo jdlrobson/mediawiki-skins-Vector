@@ -261,6 +261,36 @@ final class Constants {
 	/**
 	 * @var string
 	 */
+	public const PREF_KEY_DARK_MODE = 'vector-dark-mode';
+
+	/**
+	 * @var string
+	 */
+	public const FEATURE_DARK_MODE_ENABLED = 'DarkMode';
+
+	/**
+	 * @var string
+	 */
+	public const FEATURE_DARK_MODE_DEFAULT = 'SkinFeatureDarkMode';
+
+	/**
+	 * @var string
+	 */
+	public const REQUIREMENT_DARK_MODE_DEFAULT = 'SkinDarkModeDefault';
+
+	/**
+	 * @var string
+	 */
+	public const REQUIREMENT_DARK_MODE_ENABLED = 'DarkModeEnabled';
+
+	/**
+	 * @var string
+	 */
+	public const CONFIG_DARK_MODE_ENABLED = 'VectorDarkModeEnabled';
+	
+	/**
+	 * @var string
+	 */
 	public const CONFIG_KEY_CLIENT_PREFERENCES = 'VectorClientPreferences';
 
 	/**

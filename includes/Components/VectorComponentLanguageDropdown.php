@@ -52,7 +52,8 @@ class VectorComponentLanguageDropdown implements VectorComponent {
 	 */
 	public function getTemplateData(): array {
 		$title = $this->title;
-		$isSubjectPage = $title && $title->exists() && !$title->isTalkPage();
+		// HACK: Enabling languages for content provider (do not merge this into production ever)
+		$isSubjectPage = $title && !$title->isTalkPage();
 		// If page doesn't exist or if it's in a talk namespace, we should
 		// display a less prominent "language" button, without a label, and
 		// quiet instead of progressive. For this reason some default values

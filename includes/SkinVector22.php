@@ -76,6 +76,8 @@ class SkinVector22 extends SkinMustache {
 			$modules['styles']['skin'][] = 'skins.vector.zebra.styles';
 		}
 
+		$modules[] = 'skins.vector.nightModeSurvey';
+
 		return $modules;
 	}
 
@@ -268,6 +270,22 @@ class SkinVector22 extends SkinMustache {
 		$original = parent::getHtmlElementAttributes();
 		$featureManager = VectorServices::getFeatureManager();
 		$original['class'] .= ' ' . implode( ' ', $featureManager->getFeatureBodyClass() );
+		// apply dark mode policy
+		$user = $this->getUser();
+		$services = MediaWikiServices::getInstance();
+		$lookup = $services->getUserOptionsLookup();
+		$policy = $this->getRequest()->getRawVal(
+			'vectordarkmodecontentpolicy',
+			$lookup->getOption(
+				$user,
+				'vector-dark-mode-content-policy'
+			)
+		);
+		// don't allow arbitary classes on the HTML element
+		if ( !in_array( $policy, [ 'none', 'invert', 'strip', 'custom', 'gi' ] ) ) {
+			$policy = 'none';
+		}
+		$original['class'] .= ' vector-dark-mode-content-policy-clientpref-' . $policy;
 
 		if ( VectorServices::getFeatureManager()->isFeatureEnabled( Constants::FEATURE_STICKY_HEADER ) ) {
 			// T290518: Add scroll padding to root element when the sticky header is
@@ -320,7 +338,6 @@ class SkinVector22 extends SkinMustache {
 	 */
 	final protected function getULSLabels(): array {
 		$numLanguages = count( $this->getLanguagesCached() );
-
 		if ( $numLanguages === 0 ) {
 			return [
 				'label' => $this->msg( 'vector-no-language-button-label' )->text(),

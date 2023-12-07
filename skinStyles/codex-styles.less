@@ -1,0 +1,95 @@
+.icon-invert() {
+	// @todo: Move to Vector
+	.vector-icon:before {
+		content: '';
+		width: 20px;
+		height: 20px;
+		filter: invert(1);
+		display: block;
+	}
+	// @todo: Move
+	th.headerSort {
+		position: relative;
+	}
+	th.headerSort:after {
+		content: "";
+		display: block;
+		width: 20px;
+		height: 100%;
+		filter: invert(1);
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: 2;
+		background-image: url(/w/resources/src/jquery.tablesorter.styles/images/sort_both.svg?0e440);
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+}
+.dark-mode-policy() {
+	.mw-list-item .vector-icon,
+	.cdx-text-input__icon,
+	.cdx-button.cdx-button--icon-only .vector-icon {
+		filter: invert( 1 ) hue-rotate( 180deg );
+	}
+
+	.cdx-button:enabled, .cdx-button.cdx-button--fake-button--enabled {
+		color: var( --color-base );
+	}
+
+	.cdx-button:enabled.cdx-button--weight-quiet.cdx-button--action-progressive,
+	.cdx-button.cdx-button--fake-button--enabled.cdx-button--weight-quiet.cdx-button--action-progressive {
+		color: var( --color-progressive );
+	}
+
+	.cdx-button:enabled.cdx-button--weight-quiet.cdx-button--action-progressive:hover,
+	.cdx-button.cdx-button--fake-button--enabled.cdx-button--weight-quiet.cdx-button--action-progressive:hover {
+		color: var( --color-progressive );
+	}
+	.cdx-button:enabled:focus:not(:active):not(.cdx-button--is-active)
+	 .cdx-button.cdx-button--fake-button--enabled:focus:not(:active):not(.cdx-button--is-active) {
+		border-color: var( --color-progressive );
+		box-shadow: inset 0 0 0 1px var( --color-progressive );
+	}
+
+	// https://gerrit.wikimedia.org/g/design/codex/+/a307cecaed87467956b04f01b090c17440e4d8d6/packages/codex/src/components/button/Button.vue#153
+	.cdx-button:enabled, .cdx-button.cdx-button--fake-button--enabled {
+		background-color: var( --background-color-interactive-subtle );
+		color: var( --color-base );
+		border-color: var( --border-color-base );
+	}
+
+	// https://gerrit.wikimedia.org/g/design/codex/+/a307cecaed87467956b04f01b090c17440e4d8d6/packages/codex/src/components/text-input/TextInput.vue#380
+	.cdx-text-input__input:enabled {
+		background-color: var( --background-color-base );
+		color: var( --color-base );
+	}
+}
+
+.skin-feature-dark-mode-clientpref-1 {
+	&.vector-dark-mode-content-policy-clientpref-none,
+	&.vector-dark-mode-content-policy-clientpref-invert,
+	&.vector-dark-mode-content-policy-clientpref-strip {
+		.dark-mode-policy();
+	}
+	&.vector-dark-mode-content-policy-clientpref-custom {
+		.icon-invert();
+	}
+}
+
+
+@media ( prefers-color-scheme: dark ) {
+	.vector-dark-mode-content-policy-clientpref-custom {
+		.icon-invert();
+	}
+}
+
+
+@media ( prefers-color-scheme: dark ) {
+	.vector-dark-mode-content-policy-clientpref-none,
+	.vector-dark-mode-content-policy-clientpref-invert,
+	.vector-dark-mode-content-policy-clientpref-strip.skin-feature-dark-mode-clientpref-1 {
+		.dark-mode-policy();
+	}
+}

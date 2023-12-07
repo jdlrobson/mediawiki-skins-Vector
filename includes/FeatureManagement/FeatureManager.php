@@ -130,11 +130,31 @@ class FeatureManager {
 	}
 
 	/**
+	 * Gets user's dark mode preference value
+	 *
+	 * If user preference is not set or did not appear in config
+	 * set it to default value we go back to defualt suffix value 1
+	 * that will ensure that the feature will be enabled when requirements are met
+	 * @todo: Move to Feature class.
+	 *
+	 * @return string
+	 */
+	public function getDarkModeValueFromUserPreferenceForSuffix() {
+		$user = RequestContext::getMain()->getUser();
+		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
+		return $userOptionsLookup->getOption(
+			$user,
+			'vector-dark-mode'
+		);
+	}
+
+	/**
 	 * Gets font size user's preference value
 	 *
 	 * If user preference is not set or did not appear in config
 	 * set it to default value we go back to defualt suffix value 1
 	 * that will ensure that the feature will be enabled when requirements are met
+	 * @todo: Move out of FeatureManager class
 	 *
 	 * @return string
 	 */
@@ -160,8 +180,14 @@ class FeatureManager {
 			// switch to lower case and switch from camel case to hyphens
 			$featureClass = ltrim( strtolower( preg_replace( '/[A-Z]([A-Z](?![a-z]))*/', '-$0', $featureName ) ), '-' );
 
+			// skin- prefixed classes are shared across different skins.
+			$featurePrefix = strpos( $featureClass, 'skin-' ) === false ? 'vector-feature-' : '';
 			// Client side preferences
 			switch ( $featureClass ) {
+				case 'skin-feature-dark-mode':
+					$suffixEnabled = 'clientpref-1';
+					$suffixDisabled = 'clientpref-0';
+					break;
 				case 'custom-font-size':
 					$suffixEnabled = 'clientpref-' . $featureManager->getFontValueFromUserPreferenceForSuffix();
 					$suffixDisabled = 'clientpref-0';
@@ -177,7 +203,7 @@ class FeatureManager {
 					$suffixDisabled = 'disabled';
 					break;
 			}
-			$prefix = 'vector-feature-' . $featureClass . '-';
+			$prefix = $featurePrefix . $featureClass . '-';
 			return $featureManager->isFeatureEnabled( $featureName ) ?
 				$prefix . $suffixEnabled : $prefix . $suffixDisabled;
 		}, array_keys( $this->features ) );

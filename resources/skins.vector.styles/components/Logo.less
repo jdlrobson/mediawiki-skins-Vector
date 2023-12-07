@@ -1,3 +1,30 @@
+/* FIXME: should be configurable in core */
+.darkmode() {
+
+	.vector-dark-mode-content-policy-clientpref-none.skin-feature-dark-mode-clientpref-1 &,
+	.vector-dark-mode-content-policy-clientpref-custom.skin-feature-dark-mode-clientpref-1 &,
+	.vector-dark-mode-content-policy-clientpref-invert.skin-feature-dark-mode-clientpref-1 &,
+	.vector-dark-mode-content-policy-clientpref-strip.skin-feature-dark-mode-clientpref-1 & {
+		filter: invert( 1 );
+	}
+
+	.vector-dark-mode-content-policy-clientpref-gi.skin-feature-dark-mode-clientpref-1 & {
+		filter: none;
+	}
+	
+	@media (prefers-color-scheme: dark) {
+		.vector-dark-mode-content-policy-clientpref-none.skin-feature-dark-mode-clientpref-1 &,
+		.vector-dark-mode-content-policy-clientpref-custom.skin-feature-dark-mode-clientpref-1 &,
+		.vector-dark-mode-content-policy-clientpref-invert.skin-feature-dark-mode-clientpref-1 &,
+		.vector-dark-mode-content-policy-clientpref-strip.skin-feature-dark-mode-clientpref-1 & {
+			filter: invert( 1 );
+		}
+		.vector-dark-mode-content-policy-clientpref-gi.skin-feature-dark-mode-clientpref-1 & {
+			filter: none;
+		}
+	}
+}
+
 .mw-logo {
 	.flex-display();
 	// If icon is not configured, ensure that the logo still takes up available
@@ -33,6 +60,7 @@
 	}
 }
 
+
 .mw-logo-container {
 	// For browsers which do not support flexbox we float left.
 	// This will be ignored in flexbox browsers.
@@ -64,10 +92,12 @@
 .mw-logo-wordmark {
 	display: block;
 	margin: 0 auto;
+	.darkmode();
 }
 
 .mw-logo-tagline {
 	// For browsers which do not support flexbox.
 	display: block;
 	margin: 5px auto 0;
+	.darkmode();
 }

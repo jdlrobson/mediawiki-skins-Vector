@@ -1,4 +1,8 @@
 {
+	"skin-feature-dark-mode": {
+		"options": [ "0", "1" ],
+		"preferenceKey": "vector-dark-mode"
+	},
 	"vector-feature-custom-font-size": {
 		"options": [ "0", "1", "2" ],
 		"preferenceKey": "vector-font-size"

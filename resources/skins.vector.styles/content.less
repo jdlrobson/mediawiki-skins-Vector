@@ -1,0 +1,165 @@
+/**
+ * Styles that apply to user generated content
+ * @todo: Ultimately these should live on wiki or in Extension:WikimediaMessages
+ * x(should not be deployed in current state)
+*/
+
+.vector-dark-mode-content-policy-clientpref-gi {
+	filter: invert( 1 ) hue-rotate( 180deg );
+
+	img {
+		filter: invert(1) hue-rotate(180deg);
+	}
+}
+
+.darkmodestyles-policy-invert() {
+	/* Based on https://en.wikipedia.org/wiki/MediaWiki:Gadget-dark-mode.css */
+	&.vector-dark-mode-content-policy-clientpref-gi,
+	&.vector-dark-mode-content-policy-clientpref-invert .mw-parser-output {
+		filter: invert(1) hue-rotate( 180deg );
+		color: @color-base;
+
+		.mw-no-invert,
+		img {
+			filter: invert( 1 ) hue-rotate( 180deg );
+		}
+		
+		// reset some key inherited colors so the invert works!
+		a {
+			color: @color-link;
+		}
+		a.new {
+			color: @color-link-new;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			color: @color-emphasized;
+		}
+
+		.wikitable {
+			color: @color-base;
+		}
+	}
+}
+
+.darkmodestyles-policy-strip() {
+	&.vector-dark-mode-content-policy-clientpref-strip {
+		.page-Main_Page .mw-parser-output {
+			div div,
+			div[id],
+			div h2 {
+				border-color: inherit !important;
+				background-color: inherit !important;
+				color: inherit !important;
+			}
+		}
+		.mw-parser-output {
+			table,
+			code,
+			th,
+			td,
+			tr,
+			ul,
+			li,
+			> div div,
+			> div {
+				border-color: inherit;
+				background-color: inherit;
+				color: inherit;
+			}
+
+			.infobox * {
+				border-color: inherit !important;
+				background-color: inherit !important;
+				color: inherit !important;
+			}
+
+
+			// handle SVGs with transparent backgrounds
+			.image img[ src*='svg' ],
+			.mw-file-description img[ src*='svg' ] {
+				background-color: #fff;
+				border-radius: 1px;
+			}
+		}
+	}
+}
+
+.vector-sticky-header-container {
+	display: none !important;
+}
+
+.darkmodestyles-policy-custom() {
+	&.vector-dark-mode-content-policy-clientpref-custom {
+
+		.page-Main_Page #mp-topbanner {
+			color: inherit !important;
+			background-color: inherit !important;
+			border-color: inherit !important;
+		}
+		.page-Main_Page .mw-parser-output div {
+			h1,h2,
+			div {
+				color: inherit !important;
+				background-color: inherit !important;
+				border-color: inherit !important;
+			}
+		}
+
+		.mw-parser-output {
+			.portal-bar,
+			.side-box,
+			.ambox,
+			.tmbox,
+			.portalbox,
+			.sister-bar,
+			.navbox,
+			.mp-box,
+			.sidebar,
+			// Old school! Seen on National_Security_Advisor_(United_States)#List
+			[bgcolor],
+			// If styles are used, don't try and override them  with !important
+			// but set the colors in case background color was used.
+			[style*="background"],
+			.infobox {
+				color: @color-base;
+				/*background-color: #313131 !important;
+				opacity: 0.8;
+				background-image:  linear-gradient(135deg, #2a2a2a 25%, transparent 25%), linear-gradient(225deg, #2a2a2a 25%, transparent 25%), linear-gradient(45deg, #2a2a2a 25%, transparent 25%), linear-gradient(315deg, #2a2a2a 25%, #313131 25%) !important;
+				background-position:  10px 0, 10px 0, 0 0, 0 0 !important;
+				background-size: 20px 20px !important;
+				background-repeat: repeat !important;*/
+			}
+		}
+	}
+}
+
+.dark-mode-policy() {
+	.darkmodestyles-policy-strip();
+	.darkmodestyles-policy-invert();
+	.darkmodestyles-policy-custom();
+}
+
+// FIXME: Upstream to mediawiki.skinning
+.usermessage {
+	background-color: var( --vector-background-color-obod ) !important;
+	color:  var( --color-base, @color-base ) !important;
+
+	a {
+		color: var( --color-link, @color-link );
+
+		&:visited {
+			color: var( --color-link--visited, @color-link--visited );
+		}
+	}
+}
+
+.skin-feature-dark-mode-clientpref-1 {
+	.dark-mode-policy();
+}
+
+
+@media ( prefers-color-scheme: dark ) {
+	.dark-mode-policy();
+}
+

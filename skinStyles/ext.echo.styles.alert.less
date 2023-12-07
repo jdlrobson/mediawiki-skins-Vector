@@ -10,16 +10,24 @@
 }
 
 .vector-user-links {
-	.mw-echo-alert {
-		padding: 0.2em 0.5em;
-		white-space: nowrap;
-		// Prevent alert message from pushing user links off screen
-		max-width: 270px;
-		overflow: hidden;
-		text-overflow: ellipsis;
+	.vector-menu-content-list {
+		.mw-echo-alert {
+			padding: 0.2em 0.5em;
+			white-space: nowrap;
+			// Prevent alert message from pushing user links off screen
+			max-width: 270px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			background-color: var( --vector-background-color-obod );
+			a {
+				color: var( --background-color-base );
+			}
+		}
 
 		@media ( max-width: @max-width-breakpoint-desktop ) {
-			.echo-alert-collapse();
+			.mw-echo-alert {
+				.echo-alert-collapse();
+			}
 		}
 	}
 }

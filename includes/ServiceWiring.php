@@ -270,6 +270,47 @@ return [
 			]
 		);
 
+
+		// Feature: Dark mode
+		// ================================'
+		$featureManager->registerRequirement(
+			new OverridableConfigRequirement(
+				$services->getMainConfig(),
+				$context->getUser(),
+				$request,
+				Constants::CONFIG_DARK_MODE_ENABLED,
+				Constants::REQUIREMENT_DARK_MODE_ENABLED
+			)
+		);
+
+		$featureManager->registerRequirement(
+			new UserPreferenceRequirement(
+				$context->getUser(),
+				$services->getUserOptionsLookup(),
+				Constants::PREF_KEY_DARK_MODE,
+				Constants::REQUIREMENT_DARK_MODE_DEFAULT,
+				$request,
+				$context->getTitle()
+			)
+		);
+
+		// Register 'custom-font-size' as the default requirement
+		$featureManager->registerFeature(
+			Constants::FEATURE_DARK_MODE_ENABLED,
+			[
+				Constants::REQUIREMENT_FULLY_INITIALISED,
+				Constants::REQUIREMENT_DARK_MODE_ENABLED
+			]
+		);
+
+		$featureManager->registerFeature(
+			Constants::FEATURE_DARK_MODE_DEFAULT,
+			[
+				Constants::REQUIREMENT_FULLY_INITIALISED,
+				Constants::REQUIREMENT_DARK_MODE_DEFAULT
+			]
+		);
+
 		// Feature: T345363: Client preferences dialog
 		// ============================================
 		$featureManager->registerRequirement(

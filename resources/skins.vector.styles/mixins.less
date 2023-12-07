@@ -7,12 +7,14 @@
 .mixin-vector-menu-heading() {
 	align-self: center;
 	color: @color-subtle;
+	color: var( --color-subtle );
 	font-weight: normal;
 	cursor: default;
 	// NOTE: Setting these values does not produce a visible border.
 	// That's handled elsewhere with either border-top-style or border-bottom-style.
 	border-color: @border-color-portal-heading;
 	border-width: @border-width-base;
+	border-color: var( --border-color-portal-heading );
 }
 
 .mixin-vector-arrowed-dropdown-toggle() {
@@ -37,6 +39,7 @@
 
 	&:not( .mw-selflink ):visited {
 		color: @color-link;
+		color: var( --color-link );
 	}
 
 	.vector-icon {
@@ -62,6 +65,7 @@
 		right: 0;
 		height: 16px;
 		background: linear-gradient( rgba( 255, 255, 255, 0 ), @background-color-page-container );
+		background: linear-gradient( transparent, var( --background-color-page-container ) );
 		background-repeat: no-repeat;
 		pointer-events: none; // Make the link below the fade clickable
 	}
@@ -77,6 +81,7 @@
 	padding-left: @padding-horizontal-page-container;
 	padding-right: @padding-horizontal-page-container;
 	background-color: @background-color-page-container;
+	background-color: var( --background-color-page-container );
 	box-sizing: border-box;
 
 	@media ( min-width: @min-width-breakpoint-desktop ) {

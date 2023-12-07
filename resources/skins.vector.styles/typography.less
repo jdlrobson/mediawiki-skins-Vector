@@ -175,7 +175,7 @@ pre,
 		// Use copy of Codex/OOUI WikimediaUI theme's 'linkExternal' icon in progressive color.
 		// Note that CSSJanus is flipping the `ltr` in the URL to `rtl`.
 		// Therefore make sure that both icons are available and up-to-date.
-		background-image: url( images/link-external-small-ltr-progressive.svg );
+		background-image: var( --vector-icon-external-link );
 		background-position: center right;
 		background-repeat: no-repeat;
 		// Equivalent of `12px` at calculation base of `14px` is `0.857em`.
@@ -186,5 +186,34 @@ pre,
 		&.free {
 			word-break: break-all;
 		}
+
+
+		// @todo: use a different SVG.
+		.vector-feature-vector-dark-mode-enabled.skin-feature-dark-mode-clientpref-1 & {
+			filter: invert( 1 ) hue-rotate( 180deg );
+		}
+
+		// @todo: use a different SVG.
+		@media ( prefers-color-scheme: dark ) {
+			.vector-feature-vector-dark-mode-enabled & {
+				filter: invert( 1 ) hue-rotate( 180deg );
+			}
+		}
 	}
 }
+
+//
+// Upstream to Codex
+//
+.vector-feature-vector-dark-mode-enabled.skin-feature-dark-mode-clientpref-1 {
+	.vector-icon,
+	.cdx-text-input,
+	.cdx-button {
+		filter: invert( 1 ) hue-rotate( 180deg );
+	}
+
+	.cdx-typeahead-search .cdx-button {
+		filter: none;
+	}
+}
+

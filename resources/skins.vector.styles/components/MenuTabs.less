@@ -17,6 +17,7 @@
 	// T316574 Override visited link styles
 	.mw-list-item a {
 		color: @color-link;
+		color: var( --color-link );
 	}
 
 	/* focus and hover have outlines. Text underline interferes with bottom border */
@@ -29,11 +30,13 @@
 	.mw-list-item.new a,
 	.mw-list-item.new a:visited {
 		color: @color-link-new;
+		color: var( --color-link-new );
 	}
 
 	.mw-list-item.selected a,
 	.mw-list-item.selected a:visited {
 		color: @color-link-selected;
+		color: var( --color-link-selected );
 		border-bottom: 2px @border-style-base;
 	}
 }
